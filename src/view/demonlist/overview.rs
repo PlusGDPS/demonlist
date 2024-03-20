@@ -209,23 +209,23 @@ impl Page for DemonlistOverview {
                                 "@type": "ListItem",
                                 "position": 1,
                                 "item": {
-                                    "@id": "https://pointercrate.com/",
-                                    "name": "pointercrate"
+                                    "@id": "https://pgdl.pluscraft.fr/",
+                                    "name": "plusgdpsdemonlist"
                                 }
                             },
                             {
                                 "@type": "ListItem",
                                 "position": 2,
                                 "item": {
-                                    "@id": "https://pointercrate.com/demonlist/",
+                                    "@id": "https://pgdl.pluscraft.fr/demonlist/",
                                     "name": "demonlist"
                                 }
                             }
                         ]
                     },
-                    "name": "Geometry Dash Demonlist",
-                    "description": "The official pointercrate Demonlist!",
-                    "url": "https://pointercrate.com/demonlist/"
+                    "name": "PlusGDPS Demonlist",
+                    "description": "The official PlusGDPS Demonlist!",
+                    "url": "https://pgdl.pluscraft.fr/demonlist/"
                 }
                 </script>
             "#))

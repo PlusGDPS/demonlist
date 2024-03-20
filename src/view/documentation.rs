@@ -24,7 +24,7 @@ impl<'a> Documentation<'a> {
             toc: &*state.documentation_toc,
             content,
             page,
-            description: "The pointercrate API, which allows you to programmatically interface with the Demonlist",
+            description: "The PlusGDPS Demonlist API, which allows you to programmatically interface with the Demonlist",
             title: "API Documentation",
         })
     }
@@ -131,28 +131,28 @@ impl<'a> Page for Documentation<'a> {
         "@type": "ListItem",
         "position": 1,
         "item": {{
-          "@id": "https://pointercrate.com/",
-          "name": "pointercrate"
+          "@id": "https://pgdl.pluscraft.fr/",
+          "name": "plusgdpsdemonlist"
         }}
       }},{{
         "@type": "ListItem",
         "position": 2,
         "item": {{
-          "@id": "https://pointercrate.com/documentation/",
+          "@id": "https://pgdl.pluscraft.fr/documentation/",
           "name": "documentation"
         }}
       }},{{
         "@type": "ListItem",
         "position": 3,
         "item": {{
-            "@id": "https://pointercrate.com/documentation/account/",
+            "@id": "https://pgdl.pluscraft.fr/documentation/account/",
             "name": "account"
         }}
       }}]
     }},
     "name": "{}",
     "description": "{}",
-    "url": "https://pointercrate.com/documentation/account/",
+    "url": "https://pgdl.pluscraft.fr/documentation/account/",
     "dateCreated": "2017-04-08"
   }}
 </script>

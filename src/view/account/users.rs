@@ -7,7 +7,7 @@ pub(super) fn page(is_admin: bool) -> Markup {
             div.left {
                 div.panel.fade {
                     h2.underlined.pad {
-                        "Pointercrate Account Manager"
+                        "PlusGDPS Demonlist Account Manager"
                     }
 
                     div.flex.viewer {

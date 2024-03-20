@@ -152,7 +152,7 @@ async fn main() -> std::io::Result<()> {
             )
             .default_service(route().to(api::handle_404_or_405))
     })
-    .bind(SocketAddr::from(([127, 0, 0, 1], config::port())))?
+    .bind(SocketAddr::from(([0, 0, 0, 0], config::port())))?
     .run()
     .await?;
 

@@ -93,19 +93,13 @@ pub fn nav_bar() -> Markup {
             nav.center.collapse.underlined.see-through {
                 div.nav-icon {
                     a href = "/" {
-                        img src = {(STATIC) "images/pointercrate2.png"} style="height:15px";
+                        img src = {(STATIC) "images/logo.png"} style="height:50px";
                     }
                 }
                 div.nav-group-right.nav-group {
-                    a.nav-item.hover.white href = "/documentation/" {
+                    a.nav-item.hover.white href = "/demonlist/" title = "PlusGDPS Demonlist" {
                         span style ="display:flex; flex-direction:column;" {
-                            span style ="font-size: 50%" {"REST API"}
-                            span {"Documentation"}
-                        }
-                    }
-                    a.nav-item.hover.white href = "/demonlist/" title = "Geometry Dash Demonlist" {
-                        span style ="display:flex; flex-direction:column;" {
-                            span style ="font-size: 50%" {"Geometry Dash"}
+                            span style ="font-size: 50%" {"PlusGDPS"}
                             span {"DEMONLIST"}
                         }
                     }
@@ -131,25 +125,15 @@ pub fn footer() -> Markup {
     html! {
         footer.center {
             span.overline.pad style="text-align:center" {
-                "© Copyright 2017-2020 pointercrate.com"
+                "© Copyright 2024 PlusGDPS Demonlist - All Rights Reserved"
                 br;
-                "All rights reserved"
-                br;
-                "pointercrate.com and the Demonlist are in no way affiliated with RobTopGamesAB ®"
+                "The PlusGDPS Demonlist and pointercrate.com are in no way affiliated with eachother, or with RobTopGamesAB ®"
             }
             div.flex.no-stretch {
                 nav {
-                    h2 { "pointercrate:" }
+                    h2 { "Website:" }
                     a.link.js-scroll {
                         "Back to top"
-                    }
-                    br ;
-                    a.link href = "/#contact" {
-                        "Contact"
-                    }
-                    br ;
-                    a.link href = "/documentation/" {
-                        "API Documentation"
                     }
                     br ;
                     a.link href = "/login/" {
@@ -158,14 +142,14 @@ pub fn footer() -> Markup {
                 }
                 div {
                     h2 { "Terms of Use:" }
-                    "All content on pointercrate.com is provided free of charge. However, you may not redistribute, in any way, any original content found here without the creator's explicit permission. All content is provided without any guarantees."
+                    "All content on the PlusGDPS Demonlist is provided free of charge. However, you may not redistribute, in any way, any original content found here without the creator's explicit permission. All content is provided without any guarantees."
                 }
                 nav {
                     h2 {
                         "Demonlist:"
                     }
                     a.link href="/demonlist/1/" title = "Hardest demon" {
-                        "Current top demon"
+                        "Hardest Demon"
                     }
                     br;
                     a.link href = {"/demonlist/" (first_extended) "/"} title="Extended list" {
@@ -177,15 +161,15 @@ pub fn footer() -> Markup {
                     }
                 }
             }
-            div style="display: flex; justify-content: flex-end; align-items: center" {
+            div style="display: flex; justify-content: center; align-items: center" {
                 i class = "fa fa-twitter fa-2x" {}
                 (PreEscaped("&nbsp;&nbsp;Tweet Us:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"))
                 a href="https://twitter.com/stadust1971" target="_blank" style = "color: #666" {
-                    "Developer"
+                    "Original Developer"
                 }
                 (PreEscaped("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"))
-                a href = "https://twitter.com/demonlistgd" target = "_black" style = "color: #666" {
-                    "Demonlist Team"
+                a href = "https://twitter.com/PlusGDPS" target = "_black" style = "color: #666" {
+                    "PlusGDPS"
                 }
             }
         }

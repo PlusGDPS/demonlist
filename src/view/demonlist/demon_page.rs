@@ -154,17 +154,17 @@ impl Demonlist {
                     @match &self.integration {
                         GDIntegrationResult::DemonNotFoundByName => {
                             p.info-red {
-                                "A demon with this name was not found on the Geometry Dash servers. Please notify a list moderator of this, as it means they most likely misspelled the name!"
+                                "A demon with this name was not found on the PlusGDPS servers. Please notify a list moderator of this, as it means they most likely misspelled the name!"
                             }
                         }
                         GDIntegrationResult::DemonNotYetCached => {
                             p.info-yellow {
-                                "The data from the Geometry Dash servers has not yet been cached. Please wait a bit and refresh the page."
+                                "The data from the PlusGDPS servers has not yet been cached. Please wait a bit and refresh the page."
                             }
                         }
                         GDIntegrationResult::LevelDataNotFound => {
                             p.info-red {
-                                "It seems like this level has been deleted from the Geometry Dash servers"
+                                "It seems like this level has been deleted from the PlusGDPS servers"
                             }
                         }
                         GDIntegrationResult::LevelDataNotCached => {
@@ -467,21 +467,21 @@ impl Page for Demonlist {
                                     "@type": "ListItem",
                                     "position": 1,
                                     "item": {{
-                                        "@id": "https://pointercrate.com/",
-                                        "name": "pointercrate"
+                                        "@id": "https://pgdl.pluscraft.fr/",
+                                        "name": "plusgdpsdemonlist"
                                     }}
                                 }},{{
                                     "@type": "ListItem",<
                                     "position": 2,
                                     "item": {{
-                                        "@id": "https://pointercrate.com/demonlist/",
+                                        "@id": "https://pgdl.pluscraft.fr/demonlist/",
                                         "name": "demonlist"
                                     }}
                                 }},{{
                                     "@type": "ListItem",
                                     "position": 3,
                                     "item": {{
-                                        "@id": "https://pointercrate.com/demonlist/{0}/",
+                                        "@id": "https://pgdl.pluscraft.fr/demonlist/{0}/",
                                         "name": "{1}"
                                     }}
                                 }}
@@ -489,7 +489,7 @@ impl Page for Demonlist {
                         }},
                         "name": "#{0} - {1}",
                         "description": "{2}",
-                        "url": "https://pointercrate.com/demonlist/{0}/"
+                        "url": "https://pgdl.pluscraft.fr/demonlist/{0}/"
                     }}
                     </script>
                 "##, self.data.position(), self.data.name(), self.description().render().0)))
