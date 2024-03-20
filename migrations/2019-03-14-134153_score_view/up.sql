@@ -6,7 +6,7 @@ CREATE VIEW players_with_score AS
     SELECT players.id,
            players.name,
            RANK() OVER(ORDER BY scores.total_score DESC) AS rank,
-           CASE WHEN scores.total_score IS NULL THEN 0.0::FLOAT ELSE scores.total_score END AS score,
+           COALESCE(scores.total_score, 0.0::FLOAT) AS score,
            ROW_NUMBER() OVER(ORDER BY scores.total_score DESC) AS index,
            nationalities.iso_country_code,
            nationalities.nation
@@ -49,5 +49,5 @@ CREATE VIEW players_with_score AS
     INNER JOIN players
     ON scores.player = players.id
     LEFT OUTER JOIN nationalities
-    ON players.nationality = nationalities.iso_country_code
+    ON players.nationality::text = nationalities.iso_country_code::text
     WHERE NOT players.banned;

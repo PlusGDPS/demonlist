@@ -1,9 +1,10 @@
 -- Your SQL goes here
 
-DROP VIEW players_with_score;
-DROP FUNCTION record_score(FLOAT, FLOAT, FLOAT);
+-- Drop the existing view and function
+DROP VIEW IF EXISTS players_with_score;
+DROP FUNCTION IF EXISTS record_score(FLOAT, FLOAT, FLOAT);
 
-
+-- Recreate the function with the updated definition
 CREATE FUNCTION record_score(progress FLOAT, demon FLOAT, list_size FLOAT, requirement FLOAT) RETURNS FLOAT AS
 $record_score$
     SELECT CASE
@@ -17,6 +18,7 @@ $record_score$
 $record_score$
 LANGUAGE SQL IMMUTABLE;
 
+-- Recreate the view
 CREATE VIEW players_with_score AS
     SELECT players.id,
            players.name,

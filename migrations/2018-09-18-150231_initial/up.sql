@@ -11,7 +11,12 @@ EXCEPTION
     WHEN duplicate_object THEN null;
 END $$;
 
-CREATE EXTENSION CITEXT;
+-- Check if CITEXT extension exists before creating it
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_extension WHERE extname = 'citext') THEN
+        CREATE EXTENSION CITEXT;
+    END IF;
+END $$;
 
 CREATE TABLE IF NOT EXISTS  players(
     id SERIAL PRIMARY KEY,
