@@ -12,7 +12,7 @@ use actix_web::{
     middleware::{Logger, NormalizePath},
     web,
     web::{route, scope, JsonConfig, PathConfig, QueryConfig},
-    App, HttpRequest, HttpServer,
+    App, HttpRequest, HttpServer, HttpResponse, HttpServer
 };
 use api::{
     auth,
