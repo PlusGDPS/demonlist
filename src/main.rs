@@ -14,12 +14,21 @@ use actix_web::{
     web::{route, scope, JsonConfig, PathConfig, QueryConfig},
     App, HttpRequest, HttpServer, HttpResponse, HttpServer
 };
+use rustls::{
+    Certificate, PrivateKey, ServerConfig
+};
 use api::{
     auth,
     demonlist::{demon, misc, player, record, submitter},
     user,
 };
 use std::net::SocketAddr;
+use std::fs::File;
+use std::io::{
+    self,
+    BufReader
+};
+use std::sync::Arc;
 
 #[macro_use]
 mod util;
