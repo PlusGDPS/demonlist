@@ -12,14 +12,19 @@ use actix_web::{
     middleware::{Logger, NormalizePath},
     web,
     web::{route, scope, JsonConfig, PathConfig, QueryConfig},
-    App, HttpRequest, HttpServer,
+    App, HttpRequest, HttpServer, HttpResponse,
 };
+use rustls::{Certificate, PrivateKey, ServerConfig};
+use std::net::SocketAddr;
+use std::fs::File as StdFile;
+use std::io::{self, BufReader};
+use std::sync::Arc;
+
 use api::{
     auth,
     demonlist::{demon, misc, player, record, submitter},
     user,
 };
-use std::net::SocketAddr;
 
 #[macro_use]
 mod util;
@@ -53,13 +58,22 @@ async fn main() -> std::io::Result<()> {
 
     let application_state = PointercrateState::initialize().await;
 
+    // Load your certificate and private key
+    let certs = load_certs("cert.pem")?;
+    let key = load_private_key("key.pem")?;
+
+    let tls_config = ServerConfig::builder()
+        .with_safe_defaults()
+        .with_no_client_auth()
+        .with_single_cert(certs, key)
+        .map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
+
+    let tls_config = Arc::new(tls_config);
+
     HttpServer::new(move || {
-        let json_config =
-            JsonConfig::default().error_handler(|error, request| PointercrateError::from(error).dynamic(request.headers()).into());
-        let path_config =
-            PathConfig::default().error_handler(|error, request| PointercrateError::from(error).dynamic(request.headers()).into());
-        let query_config =
-            QueryConfig::default().error_handler(|error, request| PointercrateError::from(error).dynamic(request.headers()).into());
+        let json_config = JsonConfig::default().error_handler(|error, request| PointercrateError::from(error).dynamic(request.headers()).into());
+        let path_config = PathConfig::default().error_handler(|error, request| PointercrateError::from(error).dynamic(request.headers()).into());
+        let query_config = QueryConfig::default().error_handler(|error, request| PointercrateError::from(error).dynamic(request.headers()).into());
 
         App::new()
             .app_data(json_config)
@@ -152,9 +166,25 @@ async fn main() -> std::io::Result<()> {
             )
             .default_service(route().to(api::handle_404_or_405))
     })
-    .bind(SocketAddr::from(([0, 0, 0, 0], config::port())))?
+    .bind_rustls(SocketAddr::from(([0, 0, 0, 0], config::port())), tls_config)?
     .run()
     .await?;
 
     Ok(())
+}
+
+fn load_certs(filename: &str) -> io::Result<Vec<Certificate>> {
+    let certfile = StdFile::open(filename)?;
+    let mut reader = BufReader::new(certfile);
+    rustls_pemfile::certs(&mut reader)
+        .map(|mut certs| certs.drain(..).map(Certificate).collect())
+        .map_err(|_| io::Error::new(io::ErrorKind::InvalidData, "invalid certificate"))
+}
+
+fn load_private_key(filename: &str) -> io::Result<PrivateKey> {
+    let keyfile = StdFile::open(filename)?;
+    let mut reader = BufReader::new(keyfile);
+    let keys = rustls_pemfile::rsa_private_keys(&mut reader)
+        .map_err(|_| io::Error::new(io::ErrorKind::InvalidData, "invalid private key"))?;
+    keys.into_iter().next().map(PrivateKey).ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "no private key found"))
 }
